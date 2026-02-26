@@ -1,4 +1,4 @@
-import { IsDateString, IsNotEmpty, IsString, Length } from 'class-validator';
+import { IsDateString, IsNotEmpty, IsString, Length, MinDate } from 'class-validator';
 
 export class CreateGroupDto {
     @IsString()
@@ -8,5 +8,6 @@ export class CreateGroupDto {
 
     @IsDateString()
     @IsNotEmpty()
+    @MinDate(new Date(), { message: 'StartDate cannot be in the past' })
     startDate!: string;
 }

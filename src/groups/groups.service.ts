@@ -13,16 +13,16 @@ export class GroupsService {
     private readonly dataSource: DataSource,
   ) { }
 
-  async create(createGroupDto: CreateGroupDto) {
+  async create(createGroupDto: CreateGroupDto): Promise<Group> {
     const group = this.groupRepository.create(createGroupDto);
     return await this.groupRepository.save(group);
   }
 
-  async findAll() {
+  async findAll(): Promise<Group[]> {
     return await this.groupRepository.find();
   }
 
-  async findOne(id: string) {
+  async findOne(id: string): Promise<Group> {
     const group = await this.groupRepository.findOne({
       where: { id },
       relations: ['students'],
@@ -31,7 +31,7 @@ export class GroupsService {
     return group;
   }
 
-  async findActive() {
+  async findActive(): Promise<Partial<Group>[]> {
     return await this.groupRepository
       .createQueryBuilder('group')
       .leftJoin('group.students', 'student')
@@ -42,7 +42,7 @@ export class GroupsService {
       .getRawMany();
   }
 
-  async addStudentToGroup(groupId: string, studentId: string) {
+  async addStudentToGroup(groupId: string, studentId: string): Promise<Group> {
     return await this.dataSource.transaction(async (manager) => {
       const group = await manager.findOne(Group, {
         where: { id: groupId },
