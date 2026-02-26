@@ -58,9 +58,9 @@ Backend-сервіс для управління навчальними груп
     Запустіть контейнери:
     Bash
 
-    ```bash 
-    docker-compose up --build
-    ```
+```bash 
+docker-compose up --build
+```
     Результат:
 
         API буде доступне за адресою: http://localhost:3000
