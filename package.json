@@ -1,6 +1,9 @@
 {
   "name": "test_task",
   "version": "0.0.1",
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "private": true,
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
